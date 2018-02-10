@@ -1,0 +1,82 @@
+#!/usr/bin/zsh
+
+# Mods for the BioLinux VM found at http://environmentalomics.org/bio-linux-download/
+
+
+# start with system updates
+apt-get upgrade
+apt-get update
+
+# git
+apt-get install git
+
+# Emacs Speaks Statistics (ESS)
+apt-get install ess
+
+# libraries required by tidyverse
+apt-get install libcurl4-openssl-dev
+apt-get install libxml2-dev
+
+# R package installation
+R --no-save < BioLinux.R
+
+
+### RStudio server (see https://www.rstudio.com/products/rstudio/download-server/ for latest version information)
+apt-get install gdebi-core
+wget https://download2.rstudio.org/rstudio-server-1.0.153-amd64.deb
+gdebi rstudio-server-1.0.153-amd64.deb
+
+# open port 8787 for the server
+ufw allow 8787
+
+# start up server
+rstudio-server start
+
+
+# sickle
+git clone https://github.com/najoshi/sickle sickle
+cd sickle
+make
+mv sickle /usr/local/bin/.
+
+# seqtk
+git clone https://github.com/lh3/seqtk seqtk
+cd seqtk
+make
+sudo mv seqtk /usr/local/bin/.
+
+# samtools
+wget https://github.com/samtools/samtools/releases/download/1.7/samtools-1.7.tar.bz2
+bunzip2 samtools-1.7.tar.bz2
+tar -xf samtools-1.7
+cd samtools-1.7
+./configure
+make
+make install
+cd ..
+
+# bcftools
+git clone git://github.com/samtools/bcftools.git
+cd bcftools
+make
+make install
+cd ..
+
+# htslib
+git clone git://github.com/samtools/htslib.git
+cd htslib
+make
+make install
+cd ..
+
+# snakemake
+apt-get install python3-pip
+pip3 install --upgrade pip
+pip3 install snakemake
+
+# removed in the process of debugging some things and didn't ever use them
+apt-get remove oracle-java7-installer
+# also removed bio-linux-jalview
+
+# fail2ban
+apt-get install fail2ban
