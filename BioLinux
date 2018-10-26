@@ -21,15 +21,15 @@ apt-get install libxml2-dev
 R --no-save < BioLinux.R
 
 
-### RStudio server (see https://www.rstudio.com/products/rstudio/download-server/ for latest version information)
+# RStudio server (see https://www.rstudio.com/products/rstudio/download-server/ for latest version information)
 apt-get install gdebi-core
 wget https://download2.rstudio.org/rstudio-server-1.0.153-amd64.deb
 gdebi rstudio-server-1.0.153-amd64.deb
 
-# open port 8787 for the server
+### open port 8787 for the server
 ufw allow 8787
 
-# start up server
+### start up server
 rstudio-server start
 
 
@@ -83,3 +83,7 @@ apt-get install fail2ban
 
 # libcairo2-dev
 apt-get install libcairo2-dev
+
+
+# Setup to run a vm using kvm
+sudo apt-get install qemu-kvm libvirt-bin virtinst bridge-utils cpu-checker
