@@ -86,4 +86,5 @@ apt-get install libcairo2-dev
 
 
 # Setup to run a vm using kvm
-sudo apt-get install qemu-kvm libvirt-bin virtinst bridge-utils cpu-checker
+apt-get install qemu-kvm libvirt-bin virtinst bridge-utils cpu-checker
+apt-get install openvswitch-switch
