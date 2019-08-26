@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+## Install Shiny server (see https://www.rstudio.com/products/shiny/download-server/)
+
+# Install R and shiny package
+yum install R
+R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\"
+
+# Download and install Shniy
+wget https://download3.rstudio.org/centos6.3/x86_64/shiny-server-1.5.9.923-x86_64.rpm
+sudo yum install --nogpgcheck shiny-server-1.5.9.923-x86_64.rpm
+
+## System-level configurations
